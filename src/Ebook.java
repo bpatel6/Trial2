@@ -20,7 +20,7 @@ public class Ebook {
     }
 
     public int numPages(int charactersPerPage) {
-        -1;
+        return -1;
     }
 
     public String toString() {
