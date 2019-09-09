@@ -1,6 +1,5 @@
-import org.junit.Test;
-
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class EbookTest {
 
@@ -38,7 +37,7 @@ public class EbookTest {
     }
 
     @Test
-    public void testEbookReadPage() {
+    public void testEbookGetPage() {
         Ebook e = new Ebook("Project Gutenberg's Frankenstein, by Mary Wollstonecraft (Godwin) Shelley\n" +
                 "\n" +
                 "This eBook is for the use of anyone anywhere at no cost and with\n" +
@@ -46,13 +45,13 @@ public class EbookTest {
                 "re-use it under the terms of the Project Gutenberg License included\n" +
                 "with this eBook or online at www.gutenberg.net\n");
 
-        assertEquals("j", e.readPage(3, 1));
+        assertEquals("j <3>", e.getPage(3, 1).toString());
 
-        assertEquals("oj", e.readPage(1, 2));
+        assertEquals("oj <1>", e.getPage(1, 2).toString());
 
-        assertEquals("in,", e.readPage(10, 3));
+        assertEquals("in, <10>", e.getPage(10, 3).toString());
 
-        assertEquals("w.gutenberg.net\n", e.readPage(4, 77));
+        assertEquals("w.gutenberg.net\n <4>", e.getPage(4, 77).toString());
     }
 
 

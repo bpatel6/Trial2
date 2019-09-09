@@ -15,7 +15,7 @@ public class Ebook {
 
     }
 
-    public String readPage(int page, int charactersPerPage) {
+    public Page getPage(int page, int charactersPerPage) {
         return null; 
     }
 
