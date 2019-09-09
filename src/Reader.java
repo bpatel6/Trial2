@@ -10,7 +10,7 @@ public class Reader {
     */
 
     Reader(int capacity, int charactersPerPage) {
-
+        library = null;
     }
 
     /* Copy/paste into here the methods listed in the PDF
