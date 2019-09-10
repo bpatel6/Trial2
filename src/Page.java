@@ -1,8 +1,13 @@
 public class Page {
+    private int pagenum;
+    private String content;
 
-    public Page(int pagenumber, String contents) {}
+    public Page(int pagenumber, String contents) {
+        pagenum = pagenumber;
+        content = contents;
+    }
 
     public String toString() {
-        return null;
+        return content + " <" + pagenum + ">";
     }
 }

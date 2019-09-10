@@ -1,3 +1,4 @@
+
 public class Ebook {
     private final String author;
     private final String title;
@@ -5,27 +6,41 @@ public class Ebook {
 /* you probably won't need to add any more instance variables for this class */
 
     public Ebook(String t) {
-        author = null;
-        title = null;
-        text = null;
+        author = SystemTools.findAuthor(t);
+        title = SystemTools.findTitle(t);
+        text = t;
     }
 
     public String getAuthor() {
-        return null;
+        return author;
     }
     public String getTitle() {
-        return null;
+        return title;
     }
 
     public Page getPage(int page, int charactersPerPage) {
-        return null; 
+        int start = page*charactersPerPage;
+        int end;
+        if (start+charactersPerPage > text.length()){
+            end = text.length();
+        }
+        else {
+            end = start+charactersPerPage;
+        }
+            String data = text.substring(start, end);
+            return new Page(page,data);
     }
 
     public int numPages(int charactersPerPage) {
-        return -1;
+        if ((text.length()%charactersPerPage) == 0 ){
+            return text.length()/charactersPerPage;
+        }
+        else {
+            return (text.length() / charactersPerPage)+1;
+        }
     }
 
     public String toString() {
-        return null;
+        return getTitle() + "," + getAuthor();
     }
 }
