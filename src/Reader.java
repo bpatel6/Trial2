@@ -8,7 +8,7 @@ public class Reader {
     int size;
     int cap;
     private final int charperpage;
-    private Ebook e;
+    private static Ebook e;
     int currentPage;
     /* add more instance variables that you need
     */
@@ -42,12 +42,10 @@ public class Reader {
         if (bid < 0 || bid >= size){
             throw new EbookException("Invalid bid: " + bid);
         }
-        Ebook temp = library[bid];
         for (int j = bid; j < size-1; j++){
             library[j] = library[j+1];
         }
         library[size-1] = null;
-        temp = null;
         size--;
     }
 
@@ -67,25 +65,25 @@ public class Reader {
             throw new EbookException("Invalid bid: " + bid);
         }
         e = library[bid];
-        e.getPage(0,charperpage);
+        /*e.getPage(0,charperpage);*/
         currentPage = 0;
     }
 
     public void turnToPage(int page){
-        if (e == null){
-            throw new EbookException("Book is not open");
-        }
-        else {
+        if (e != null) {
             e.getPage(page, charperpage);
             currentPage = page;
         }
     }
 
     public String readPage(){
-        if (e == null){
+        if (e != null) {
+            return String.valueOf(e.getPage(currentPage, charperpage));
+        }
+        else {
             throw new EbookException("Book is not open");
         }
-        return String.valueOf(e.getPage(currentPage,charperpage));
+
     }
 
     public String titleOfBook(){
