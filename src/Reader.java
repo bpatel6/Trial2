@@ -6,14 +6,19 @@ public class Reader {
     // We require that you use it for that purpose.
     private final Ebook[] library;
     int size;
+    int cap;
     private final int charperpage;
+    private Ebook e;
+    int currentPage;
     /* add more instance variables that you need
     */
 
     Reader(int capacity, int charactersPerPage) {
         library = new Ebook[capacity];
         size = 0;
+        cap = capacity;
         charperpage = charactersPerPage;
+        e = null;
     }
 
     /* Copy/paste into here the methods listed in the PDF
@@ -26,19 +31,23 @@ public class Reader {
     }
 
     public void addBook(String text) {
+        if (this.size == cap){
+            throw new EbookException("Book couldn't be added");
+        }
         this.library[this.size] = new Ebook(text);
         size += 1;
     }
 
-    public void deleteBook(int bid) throws IndexOutOfBoundsException {
+    public void deleteBook(int bid) {
         if (bid < 0 || bid >= size){
-            throw new IndexOutOfBoundsException("Invalid bid: " + bid);
+            throw new EbookException("Invalid bid: " + bid);
         }
         Ebook temp = library[bid];
         for (int j = bid; j < size-1; j++){
             library[j] = library[j+1];
         }
         library[size-1] = null;
+        temp = null;
         size--;
     }
 
@@ -48,20 +57,42 @@ public class Reader {
 
     public void printTitles(){
         for (int i = 0; i < size; i++){
-            library[i].toString();
+            String s = i + ": " + library[i].toString();
+            System.out.println(s);
         }
     }
 
-    public void openBook(int bid) throws IndexOutOfBoundsException{
+    public void openBook(int bid){
         if (bid < 0 || bid >= size){
-            throw new IndexOutOfBoundsException("Invalid bid: " + bid);
+            throw new EbookException("Invalid bid: " + bid);
         }
+        e = library[bid];
+        e.getPage(0,charperpage);
+        currentPage = 0;
     }
 
     public void turnToPage(int page){
-
+        if (e == null){
+            throw new EbookException("Book is not open");
+        }
+        else {
+            e.getPage(page, charperpage);
+            currentPage = page;
+        }
     }
-    public String readPage(){
 
+    public String readPage(){
+        if (e == null){
+            throw new EbookException("Book is not open");
+        }
+        return String.valueOf(e.getPage(currentPage,charperpage));
+    }
+
+    public String titleOfBook(){
+        return e.getTitle();
+    }
+
+    public String authorOfBook(){
+        return e.getAuthor();
     }
 }

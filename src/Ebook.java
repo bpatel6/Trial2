@@ -41,6 +41,6 @@ public class Ebook {
     }
 
     public String toString() {
-        return getTitle() + "," + getAuthor();
+        return this.getTitle() + " by " + this.getAuthor();
     }
 }
