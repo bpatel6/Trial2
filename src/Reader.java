@@ -8,7 +8,7 @@ public class Reader {
     int size;
     int cap;
     private final int charperpage;
-    private static Ebook e;
+    public Ebook e;
     int currentPage;
     /* add more instance variables that you need
     */
@@ -18,7 +18,6 @@ public class Reader {
         size = 0;
         cap = capacity;
         charperpage = charactersPerPage;
-        e = null;
     }
 
     /* Copy/paste into here the methods listed in the PDF
@@ -41,6 +40,9 @@ public class Reader {
     public void deleteBook(int bid) {
         if (bid < 0 || bid >= size){
             throw new EbookException("Invalid bid: " + bid);
+        }
+        if (library[bid].equals(e)){
+            e = null;
         }
         for (int j = bid; j < size-1; j++){
             library[j] = library[j+1];
@@ -65,7 +67,6 @@ public class Reader {
             throw new EbookException("Invalid bid: " + bid);
         }
         e = library[bid];
-        /*e.getPage(0,charperpage);*/
         currentPage = 0;
     }
 
