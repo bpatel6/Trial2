@@ -25,16 +25,23 @@ public class Reader {
      */
 
     public void addBook(URL url) {
-        this.library[this.size] = new Ebook(SystemTools.download(url));
-        size += 1;
+        if (this.size == cap){
+            throw new EbookException("Book couldn't be added");
+        }
+        else {
+            this.library[this.size] = new Ebook(SystemTools.download(url));
+            size += 1;
+        }
     }
 
     public void addBook(String text) {
         if (this.size == cap){
             throw new EbookException("Book couldn't be added");
         }
-        this.library[this.size] = new Ebook(text);
-        size += 1;
+        else {
+            this.library[this.size] = new Ebook(text);
+            size += 1;
+        }
     }
 
     public void deleteBook(int bid) {
