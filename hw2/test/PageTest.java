@@ -8,4 +8,5 @@ class PageTest {
         Page p = new Page(21, "Hello World");
         assertEquals("Hello World <21>", p.toString());
     }
+
 }
